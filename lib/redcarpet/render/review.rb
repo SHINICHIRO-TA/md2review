@@ -1,5 +1,7 @@
 require 'digest/md5'
 require 'uri'
+require 'shortuuid'
+require 'securerandom'
 
 module Redcarpet
   module Render
@@ -75,10 +77,15 @@ module Redcarpet
         code_text = normal_text(code).chomp
         caption = ""
         if language
-          if language =~ /caption=\"(.*)\"/
-            caption = "["+$1+"]"
+          if language == "mermaid"
+            id = ShortUUID.shorten SecureRandom.uuid
+            caption = "[#{id}][#{language}]"
           else
-            caption = "[][#{language}]"
+            if language =~ /caption=\"(.*)\"/
+              caption = "["+$1+"]"
+            else
+              caption = "[][#{language}]"
+            end
           end
         end
 
@@ -86,6 +93,8 @@ module Redcarpet
           "\n//cmd{\n#{code_text}\n//}\n"
         elsif @math && language == "math"
           "\n//texequation{\n#{code.chomp}\n//}\n"
+        elsif language == "mermaid"
+          "\n//graph#{caption}{\n#{code_text}\n//}\n"
         else
           "\n//emlist#{caption}{\n#{code_text}\n//}\n"
         end

@@ -1,5 +1,12 @@
 # md2review
 
+## Customize
+
+build: gem build md2review.gemspec
+
+install: gem install ./md2review-1.12.2.gem 
+
+
 [![Gem Version](https://badge.fury.io/rb/md2review.svg)](https://badge.fury.io/rb/md2review)
 [![Build Status](https://secure.travis-ci.org/takahashim/md2review.svg)](https://travis-ci.org/takahashim/md2review)
 

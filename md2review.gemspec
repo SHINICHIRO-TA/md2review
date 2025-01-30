@@ -6,11 +6,11 @@ require 'md2review/version'
 Gem::Specification.new do |gem|
   gem.name          = "md2review"
   gem.version       = MD2ReVIEW::VERSION
-  gem.authors       = ["takahashim"]
-  gem.email         = ["takahashimm@gmail.com"]
+  gem.authors       = ["s.takahashi"]
+  gem.email         = ["shinichiro_takahashi@trust-partner.co.jp"]
   gem.description   = %q{a converter from Markdown to Re:VIEW. It uses redcarpet.}
   gem.summary       = %q{a converter from Markdown to Re:VIEW}
-  gem.homepage      = 'https://github.com/takahashim/md2review'
+  gem.homepage      = 'https://github.com/SHINICHIRO-TA/md2review'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

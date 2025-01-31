@@ -151,7 +151,18 @@ module Redcarpet
       def table(header, body)
         @sep = nil
         header_text = ""
+        s = ""
         if header
+          ## A4 Portrait 210mm として。
+          s = "//tsize[|latex||"
+          header.split(/\t|\n/).size.times do |row|
+            if row == 0
+              s << "L{40mm}|"
+            else
+              s << "L{#{(210-40).div(header.split(/\t|\n/).size - 1)}mm}|"
+            end
+          end
+          s << "]"
           header_text = "#{header}-----------------\n"
         end
         body.chomp!
@@ -160,7 +171,7 @@ module Redcarpet
           caption = @table_caption.strip
           @table_caption = nil
         end
-        "//table[#{table_id()}][#{caption}]{\n#{header_text}#{body}\n//}\n"
+        "#{s}\n//table[#{table_id()}][#{caption}]{\n#{header_text}#{body}\n//}\n"
       end
 
       def table_row(content)

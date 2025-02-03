@@ -155,11 +155,15 @@ module Redcarpet
         if header
           ## A4 Portrait 210mm として。
           s = "//tsize[|latex||"
-          header.split(/\t|\n/).size.times do |row|
-            if row == 0
-              s << "L{40mm}|"
-            else
-              s << "L{#{(210-40).div(header.split(/\t|\n/).size - 1)}mm}|"
+          if header.include?("ID") && header.include?("PIC") && header.include?("VALUE")
+              s << "L{50mm}|L{45mm}|L{30mm}|L{40mm}|"
+          else
+            header.split(/\t|\n/).size.times do |row|
+              if row == 0
+                s << "L{40mm}|"
+              else
+                s << "L{#{(210-(24*2)-40).div(header.split(/\t|\n/).size - 1)}mm}|"
+              end
             end
           end
           s << "]"
